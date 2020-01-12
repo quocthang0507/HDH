@@ -1,0 +1,90 @@
+#include<iostream.h>
+#include<conio.h>
+#include<math.h>
+#include<thuvien.h>
+#include<graphics.h>
+#include<dos.h>
+void main()
+{
+	int ktra[50],n,z=1,min=0,d=0,m,k=0,temp;
+	float x[80],dodai[80],y[80],tungdo,hoangdo,canh;
+	char *s="A";
+	thuvien();
+	cout<<"Nhap vao so dinh\n";
+	cin>>n;
+	for(int i=1;i<=n;i++)
+	{
+		cout<<"Toa do dinh ["<<i<<"]\n";
+		cout<<"X= ";
+		cin>>x[i];
+		cout<<"Y= ";
+		cin>>y[i];
+		ktra[i]=0;
+	}
+	for(i=1;i<=n;i++)
+	{
+		dodai[i]=0;
+		setcolor(3);
+		outtextxy(320+x[i],240-y[i],s);
+	}
+ktra[1]=1;
+moveto(320+6,240-1);
+cout<<"Hanh trinh: [1],";
+for(int j=1;j<=n;j++)
+ {
+	for(i=1;i<=n;i++)
+	{
+		if(ktra[i]==0)
+		{
+			dodai[i]=sqrt(fabs(pow(x[i]-x[z],2)+pow(y[i]-y[z],2)));
+			d++;
+			if(d==1)
+			k=i;
+		}
+	}
+	min=dodai[k];
+	d=0; 
+	m=0;
+	for(i=1;i<=n;i++)
+	{
+		if(ktra[i]==0)
+		{
+			if(min>dodai[i])
+			{
+				min=dodai[i];
+			    m=i;
+			}
+		}
+	}
+	if(m==0)
+	{
+		m=k;
+	}
+	temp=z;
+	z=m;
+	ktra[m]=1;
+//------------
+
+  if((y[m]>y[temp])&&(x[m]< x[temp]))
+  {
+  	tungdo=y[m]-y[temp];
+	hoangdo=x[temp]-x[m];
+  		for(float i=1;i<hoangdo;i++)
+	{
+		delay(200);
+		canh=(i*(tungdo/hoangdo));
+		setcolor(YELLOW);
+		lineto(320+(x[temp]-i),240-(y[temp]-canh)-1);
+	}
+  }
+
+//---------------
+	setcolor(4);
+	delay(300);
+	lineto(320+x[m],240-y[m]);
+    cout<<" ["<<m<<"],";
+}
+cout<<"\b\b\b\b\b\b        ";
+getch();
+}
+
